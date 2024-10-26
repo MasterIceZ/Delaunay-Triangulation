@@ -1,3 +1,7 @@
+# Delaunay Triangulation
+
+This project uses the Bowyer-Watson algorithm to perform Delaunay triangulation on a set of points in 2D and 3D space. I tries to implement the algorithm in 3D space, but it ended up being too complex and I couldn't get it to work. So I just project the 3D points onto the -XY plane and perform the triangulation in 2D space.
+
 ## Triangulation
 
 Run C++ file via makefile
@@ -6,7 +10,7 @@ Run C++ file via makefile
 make rebuild MAIN_FILE=<CPP FILE>
 ```
 
-(I hope `src/degen.cpp` is the finsihed version)
+(I hope `src/degen.cpp` is the finished version)
 
 ## Visualization
 

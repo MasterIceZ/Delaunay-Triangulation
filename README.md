@@ -1,6 +1,6 @@
 # Delaunay Triangulation
 
-This project uses the Bowyer-Watson algorithm to perform Delaunay triangulation on a set of points in 2D and 3D space. I tries to implement the algorithm in 3D space, but it ended up being too complex and I couldn't get it to work. So I just project the 3D points onto the -XY plane and perform the triangulation in 2D space.
+This project uses the Bowyer-Watson algorithm to perform Delaunay triangulation on a set of points in 2D and 3D space. I tries to implement the algorithm in 3D space, but it ended up being too complex and I couldn't get it to work. So I just project the 3D points onto the $y = -x$ plane and perform the triangulation in 2D space.
 
 ## Triangulation
 

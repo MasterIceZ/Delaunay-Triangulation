@@ -50,37 +50,43 @@ std::vector<triangle_t> bowyer_watson(std::vector<point_t> points) {
 
   for(const auto& point: points) {
     std::vector<triangle_t> bad_triangles;
-    for (const auto& triangle : mesh) {
+    for (const auto& triangle: mesh) {
       if (circumcircle_contains(triangle, point)) {
           bad_triangles.push_back(triangle);
       }
     }
     std::vector<edge_t> polygon;
-    for (const auto& tri : bad_triangles) {
-      edge_t edges[3] = {{tri.a, tri.b}, {tri.b, tri.c}, {tri.c, tri.a}};
-      for (const auto& edge : edges) {
-          bool shared = false;
-          for (const auto& other_tri : bad_triangles) {
-              if (tri == other_tri) continue;
-              edge_t other_edges[3] = {{other_tri.a, other_tri.b}, {other_tri.b, other_tri.c}, {other_tri.c, other_tri.a}};
-              for (const auto& other_edge : other_edges) {
-                  if ((edge.first == other_edge.first && edge.second == other_edge.second) ||
-                      (edge.first == other_edge.second && edge.second == other_edge.first)) {
-                      shared = true;
-                      break;
-                  }
-              }
-              if (shared) break;
+    for (const auto& tri: bad_triangles) {
+      edge_t edges[3] = {
+        {tri.a, tri.b}, {tri.b, tri.c}, {tri.c, tri.a}
+      };
+      for(const auto& edge: edges) {
+        bool shared = false;
+        for(const auto& other_tri: bad_triangles) {
+          if(tri == other_tri) continue;
+          edge_t other_edges[3] = {
+            {other_tri.a, other_tri.b}, 
+            {other_tri.b, other_tri.c}, 
+            {other_tri.c, other_tri.a}
+          };
+          for(const auto& other_edge: other_edges) {
+            if((edge.first == other_edge.first && edge.second == other_edge.second) ||
+                (edge.first == other_edge.second && edge.second == other_edge.first)) {
+                shared = true;
+                break;
+            }
           }
-          if (!shared) {
-              polygon.push_back(edge);
-          }
+          if (shared) break;
+        }
+        if (!shared) {
+          polygon.push_back(edge);
+        }
       }
     }
-    for(const auto& triangle : bad_triangles) {
+    for(const auto& triangle: bad_triangles) {
       mesh.erase(std::remove(mesh.begin(), mesh.end(), triangle), mesh.end());
     }
-    for(const auto& edge : polygon) {
+    for(const auto& edge: polygon) {
       mesh.emplace_back(edge.first, edge.second, point);
     }
   }

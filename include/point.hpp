@@ -40,6 +40,10 @@ struct point3d_t {
   bool operator < (const point3d_t& other) const {
     return std::tie(x, y, z) < std::tie(other.x, other.y, other.z);
   }
+
+  bool operator > (const point3d_t& other) const {
+    return std::tie(x, y, z) > std::tie(other.x, other.y, other.z);
+  }
 };
 
 struct triangle_t {
@@ -77,37 +81,6 @@ struct triangle3d_t {
 
   bool contains_vertex(const point3d_t& p) const {
     return a == p || b == p || c == p;
-  }
-};
-
-struct tetrahedron_t;
-using face_t = std::tuple<point3d_t, point3d_t, point3d_t>;
-
-struct tetrahedron_t {
-  point3d_t a, b, c, d;
-
-  tetrahedron_t(point3d_t a, point3d_t b, point3d_t c, point3d_t d) : a(a), b(b), c(c), d(d) {}
-  tetrahedron_t() : a(), b(), c(), d() {}
-
-  bool operator == (const tetrahedron_t& other) const {
-    return a == other.a && b == other.b && c == other.c && d == other.d;
-  }
-
-  bool operator != (const tetrahedron_t& other) const {
-    return a != other.a || b != other.b || c != other.c || d != other.d;
-  }
-
-  bool contains_vertex(const point3d_t& p) const {
-    return a == p || b == p || c == p || d == p;
-  }
-
-  std::vector<face_t> get_faces() const {
-    return {
-      {a, b, c},
-      {a, b, d},
-      {a, c, d},
-      {b, c, d}
-    };
   }
 };
 

@@ -8,12 +8,11 @@
 #include <map>
 #include <cmath>
 
-point_t project_point(const point3d_t& point) {
-  double angle = acos(-1) / 4.0;
-  double x_rot = point.x * cos(angle) - point.y * sin(angle);
+point_t project_point(const point3d_t &point) {
+  double angle = acos(-1) / 6.0;
   double y_rot = point.x * sin(angle) + point.y * cos(angle);
 
-  return point_t(-y_rot, x_rot);
+  return point_t(-y_rot, point.z);
 }
 
 int main() {

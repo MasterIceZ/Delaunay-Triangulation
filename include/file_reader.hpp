@@ -58,18 +58,6 @@ void write_triangles3d(const std::vector<triangle3d_t>& triangles, const std::st
   }
 }
 
-void write_tetrahedron(const std::vector<tetrahedron_t>& tetrahedrons, const std::string& filename) {
-  std::ofstream file(filename);
-  if (!file.is_open()) {
-    throw std::runtime_error("Could not open file " + filename);
-  }
-  for (const auto& tet : tetrahedrons) {
-    file << tet.a.x << " " << tet.a.y << " " << tet.a.z << " ";
-    file << tet.b.x << " " << tet.b.y << " " << tet.b.z << " ";
-    file << tet.c.x << " " << tet.c.y << " " << tet.c.z << " ";
-    file << tet.d.x << " " << tet.d.y << " " << tet.d.z << " ";
-    file << std::endl;
-  }
-}
+
 
 #endif

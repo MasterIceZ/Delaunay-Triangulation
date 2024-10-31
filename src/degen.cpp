@@ -32,7 +32,7 @@ bool point_collinear(std::set<point3d_t> points){
   return true;
 }
 
-int main() {
+int main(int argc, char* argv[]) {
   std::vector<point3d_t> points_3d = read_points3d("./sample/mcv/degen.in");
   std::map<point_t, point3d_t> point_map;
   std::vector<point_t> points;
@@ -56,6 +56,13 @@ int main() {
   if(point_collinear(points_set)){
     std::cerr << "Points are collinear" << std::endl;
     std::cout << "(" << points_set.begin()->x << ", " << points_set.begin()->y << ", " << points_set.begin()->z << ") - (" << points_set.rbegin()->x << ", " << points_set.rbegin()->y << ", " << points_set.rbegin()->z << ")" << std::endl;
+    
+    std::string fileName = "./sample/mcv/degen.out";
+    std::ofstream file(fileName);
+    if (!file.is_open()) {
+      throw std::runtime_error("Could not open file " + fileName);
+    }
+    file << "(" << points_set.begin()->x << ", " << points_set.begin()->y << ", " << points_set.begin()->z << ") - (" << points_set.rbegin()->x << ", " << points_set.rbegin()->y << ", " << points_set.rbegin()->z << ")" << std::endl;
   }
 
   return 0;

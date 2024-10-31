@@ -5,15 +5,15 @@
 #include <triangulate.hpp>
 
 #include <iostream>
+#include <set>
 #include <map>
 #include <cmath>
 
 point_t project_point(const point3d_t& point) {
-  double angle = acos(-1) / 4.0;
-  double x_rot = point.x * cos(angle) - point.y * sin(angle);
+  double angle = acos(-1) / 6.0;
   double y_rot = point.x * sin(angle) + point.y * cos(angle);
 
-  return point_t(-y_rot, x_rot);
+  return point_t(-y_rot, point.z);
 }
 
 int main() {
@@ -25,6 +25,9 @@ int main() {
     point_map[projected_point] = point;
     points.push_back(projected_point);
   }
+  std::cerr << "Number of points: " << points.size() << std::endl;
+  std::set<point_t> point_set(points.begin(), points.end());
+  std::cerr << "Number of unique points: " << point_set.size() << std::endl;
   std::vector<triangle_t> mesh = bowyer_watson(points);
   std::cerr << "Number of triangles: " << mesh.size() << std::endl;
   std::vector<triangle3d_t> mesh_3d;

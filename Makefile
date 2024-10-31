@@ -9,6 +9,9 @@ MAIN_FILE ?= src/main.cpp
 
 INCLUDES=-I$(PROJ_DIR)/include
 
+INPUT ?= input.in
+OUTPUT ?= output.out
+
 all: build run
 
 build: $(TARGET)
@@ -18,7 +21,7 @@ $(TARGET): $(MAIN_FILE)
 	$(CXX) -o $(TARGET) $(MAIN_FILE) $(INCLUDES) $(CFXXLAGS)
 
 run:
-	@./$(TARGET)
+	@./$(TARGET) $(INPUT) $(OUTPUT)
 
 clean:
 	$(RM) -rf build/

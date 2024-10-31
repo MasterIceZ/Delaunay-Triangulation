@@ -7,10 +7,10 @@ This project uses the Bowyer-Watson algorithm to perform Delaunay triangulation 
 Run C++ file via makefile
 
 ```
-make rebuild MAIN_FILE=<CPP FILE>
+./gen.sh
 ```
 
-(I hope `src/degen.cpp` is the finished version)
+(I hope `src/gen_all.cpp` is the finished version)
 
 ## Visualization
 

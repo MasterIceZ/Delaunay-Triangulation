@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 import sys
 
 if len(sys.argv) != 2:
@@ -31,6 +31,30 @@ for edge in edges:
   ax.plot(edge_points[:, 0], edge_points[:, 1], edge_points[:, 2], color='black')
 
 ax.scatter(points[:, 0], points[:, 1], points[:, 2], color='b')
+
+triangles = []
+edge_dict = {}
+for edge in edges:
+  p1, p2 = edge
+  if p1 not in edge_dict:
+    edge_dict[p1] = set()
+  if p2 not in edge_dict:
+    edge_dict[p2] = set()
+  edge_dict[p1].add(p2)
+  edge_dict[p2].add(p1)
+
+for p1 in edge_dict:
+  for p2 in edge_dict[p1]:
+    for p3 in edge_dict[p2]:
+      if p3 in edge_dict[p1] and p1 != p2 and p2 != p3 and p1 != p3:
+        triangle = sorted([p1, p2, p3])
+        if triangle not in triangles:
+          triangles.append(triangle)
+
+for triangle in triangles:
+  vertices = np.array(triangle)
+  poly = Poly3DCollection([vertices], edgecolor='black', facecolors='cyan', alpha=0.5)
+  ax.add_collection3d(poly)
 
 ax.set_xlabel('X')
 ax.set_ylabel('Y')
